@@ -1,32 +1,22 @@
-#include<iostream>
+#include<cstdio>
 #include<algorithm>
 using namespace std;
-const int N = 5005;
-int n, high[N], f[N];
-int LIS()
-{
-    int ret = 0;
-    f[1] = 1;
-    for (int i = 2; i <= n; i++) {
-        int Max = 0;
-        for (int j = 1; j<i; j++)
-            if (high[j]<high[i]) {
-            Max = max(Max, f[j]);
-        }
-        f[i] = Max + 1;
-    }
-    for (int i = 1; i <= n; i++)
-    ret = max(ret, f[i]);
-    return ret;
-}
+const int maxn=1005, INF=0x7f7f7f7f;
+int a[maxn],f[maxn];
+int n, ans=-INF;
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cin >> n;
-    for (int i = 1; i <= n; i++)
-    cin >> high[i];
-    cout << LIS() << endl;
-    //system("pause");
-    return 0;
+    scanf("%d", &n);
+    for(int i=1;i<=n;i++){
+        scanf("%d",&a[i]);
+        f[i]=1;
+    }
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<i;j++)
+            if(a[j]<a[i])
+                f[i]=max(f[i],f[j]+1);
+ for(int i=1;i<=n;i++)
+ ans=max(ans,f[i]);
+ printf("%d\n",ans);
+ return 0;
 }
